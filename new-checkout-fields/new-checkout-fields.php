@@ -24,6 +24,10 @@ function mayone_edd_custom_checkout_fields() {
 		<input class="edd-input" type="text" name="edd_employer" id="edd-employer" placeholder="<?php _e('Employer Name', 'mayone_edd'); ?>" value=""/>
 	</p>
 	<?php
+
+	// Unhook this action so it doesn't fire twice if the registration option is turned on
+	// (ref:  https://easydigitaldownloads.com/support/topic/edd_purchase_form_user_info-seems-to-be-running-twice-on-checkout-page/)
+	remove_action('edd_purchase_form_user_info', 'mayone_edd_custom_checkout_fields');
 }
 add_action('edd_purchase_form_user_info', 'mayone_edd_custom_checkout_fields');
 
